@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89074f6bf1f804577b7823432ce7dfc0, type: 3}
+  m_Name: BulletPatternPlayer
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 5212484419684267555, guid: f18d187b9fe944fbcb3523305bb6b65e, type: 3}
+  bulletS: 50
+  bulletA: 0
+  bulletJ: 0
+  deltaS: 0
+  deltaA: 0
+  deltaJ: 0
+  myPosition: {x: 1.0287505, y: 19.128948, z: 0}
+  rangeInDegrees: 360
+  direction: {x: 0, y: 0, z: 0}
+  amountOfBullets: 4
+  interval: 0.25
+  deltaInterval: 0
+  duration: 1e+12
+  rotationSpeed: 30
+  rotationAccel: 0
+  rotationJerk: 0
+  shootAtPlayer: 0
+  isRunning: 1
