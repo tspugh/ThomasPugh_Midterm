@@ -12,6 +12,7 @@ public class BulletSpawner : MonoBehaviour
 	void Start()
 	{
 		StartPattern();
+		gameObject.AddComponent<AudioSource>();
 	}
 
 	// Update is called once per frame
@@ -37,7 +38,8 @@ public class BulletSpawner : MonoBehaviour
             {
 				maxWait = (bulletPatterns[selection].bulletHolder[i].duration > maxWait) ? bulletPatterns[selection].bulletHolder[i].duration : maxWait;
 				BulletPattern pat = bulletPatterns[selection].bulletHolder[i];
-				StartCoroutine(pat.InstantiateBullets());
+
+				StartCoroutine(pat.InstantiateBullets(this.gameObject));
             }
 			yield return new WaitForSeconds(maxWait);
 		}

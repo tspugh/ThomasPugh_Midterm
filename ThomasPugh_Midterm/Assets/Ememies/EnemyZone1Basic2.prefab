@@ -100,15 +100,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b001e4d883643b0948986a79e69057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 6
-  health: 6
   velocity: 9
   acceleration: 0
   velocityDir: {x: 0, y: 0, z: 0}
   accelerationDir: {x: 0, y: 0, z: 0}
   gameStatus: {fileID: 11400000, guid: a5ff2fe6101e949d1939b31940fb8c2d, type: 2}
   ec: 1
-  teleportOffset: 10
+  teleportOffset: 3
   rotateSpeed: 25
 --- !u!61 &8382498653413988837
 BoxCollider2D:
@@ -148,11 +146,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecef2571cb61f4c4b95f0e29c06554a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  maxHealth: 10
+  health: 25
+  maxHealth: 25
   tags:
   - PlayerBullet
   damageTaken: 1
+  destructionNoise: {fileID: 8300000, guid: e275382b8984c4acbabc5154470c4338, type: 3}
 --- !u!50 &8382498653413988834
 Rigidbody2D:
   serializedVersion: 4

@@ -23,4 +23,4 @@ MonoBehaviour:
   potentialBoss:
   - {fileID: 11400000, guid: 5d276362755a4407c9c37f4dc84045b9, type: 2}
   background: {fileID: 8353908648861383062, guid: 5e560aebd8d0c4d5f935d80ff97d66e6, type: 3}
-  color: {r: 1, g: 0, b: 0, a: 1}
+  color: {r: 0.674, g: 0.23387797, b: 0.23387797, a: 1}

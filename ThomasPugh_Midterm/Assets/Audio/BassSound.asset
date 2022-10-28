@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 518a707ebc3dc4021af534d4d5a8f4a5, type: 3}
+  m_Name: BassSound
+  m_EditorClassIdentifier: 
+  intro: {fileID: 8300000, guid: 2745471428ccf4e0fbca4e45c6917a9b, type: 3}
+  menu: {fileID: 8300000, guid: 863b6f163a5d34c188c66775a6a60b94, type: 3}
+  main: {fileID: 8300000, guid: 863b6f163a5d34c188c66775a6a60b94, type: 3}
+  miniboss: {fileID: 8300000, guid: 575c3f1db5b144538815559a83c1abfa, type: 3}
+  transition: {fileID: 8300000, guid: 38af4ed82f0974b52aff802a622150f4, type: 3}
+  boss: {fileID: 8300000, guid: 575c3f1db5b144538815559a83c1abfa, type: 3}

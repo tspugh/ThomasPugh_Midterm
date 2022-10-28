@@ -26,8 +26,12 @@ public class Zone : ScriptableObject
     public Wave GetNextWave(int value)
     {
         int maxDifficulty = Mathf.CeilToInt(GetMaxDifficulty()*(value/length));
-        if (value <= length / 2 - 1 || (value > length / 2 && value <= length+1))
+        if (value <= length / 2 - 1 || (value > length / 2 && value < length+1))
         {
+            //messy warning
+            if(value > length / 2)
+                GameEvents.InvokeChangeSoundtrack(SoundtrackType.Transition);
+
             List<Wave> temp = new List<Wave>(potentialWaves);
             while (temp.Count > 0)
             {
@@ -44,10 +48,17 @@ public class Zone : ScriptableObject
         }
         else if (value <= length / 2 && value > length / 2 - 1)
         {
+            //messy warning
+            GameEvents.InvokeChangeSoundtrack(SoundtrackType.Miniboss);
+
             return potentialMiniboss[Random.Range(0, potentialMiniboss.Length)];
+            
         }
-        else if (value > length)
+        else if (value == length + 1)
         {
+            //messy warning
+            GameEvents.InvokeChangeSoundtrack(SoundtrackType.Boss);
+
             return potentialBoss[Random.Range(0, potentialBoss.Length)];
         }
         return null;

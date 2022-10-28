@@ -9,6 +9,7 @@ public class Damageable : MonoBehaviour
     public float maxHealth;
     public string[] tags;
     public float damageTaken;
+    public AudioClip destructionNoise;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,6 +29,13 @@ public class Damageable : MonoBehaviour
     public void DoDestroy()
     {
         GameEvents.InvokeDamagableDestroyed(gameObject);
+        AudioSource a = gameObject.GetComponent<AudioSource>();
+        if(a)
+        {
+            a.clip = destructionNoise;
+            a.volume = 0.25f;
+            a.Play();
+        }
         Destroy(gameObject);
     }
 

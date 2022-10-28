@@ -19,15 +19,18 @@ MonoBehaviour:
   deltaS: 0
   deltaA: 0
   deltaJ: 0
-  myPosition: {x: -21.476353, y: 7.42739, z: 0}
+  myPosition: {x: -6.03837, y: 14.557228, z: 0}
   rangeInDegrees: 360
   direction: {x: 0, y: 0, z: 0}
   amountOfBullets: 3
-  interval: 1
+  interval: 0.1
   deltaInterval: 0
-  duration: 3.4028235e+38
+  duration: 0.5
   rotationSpeed: 100
   rotationAccel: 0
   rotationJerk: 0
   shootAtPlayer: 0
   isRunning: 1
+  randomAngle: 1
+  deltaPitch: 0.05
+  mySound: {fileID: 8300000, guid: c817d010b1c2149f0b1f3ab66e7192ae, type: 3}

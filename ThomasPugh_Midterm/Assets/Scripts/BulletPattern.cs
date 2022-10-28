@@ -31,9 +31,17 @@ public class BulletPattern : ScriptableObject
 
     public bool isRunning = true;
 
-    public IEnumerator InstantiateBullets()
+    public bool randomAngle = true;
+
+    public float deltaPitch;
+
+    public AudioClip mySound;
+
+    public IEnumerator InstantiateBullets(GameObject gameObject)
     {
         float angle = Vector3.Angle(direction,Vector3.right);
+        if (randomAngle)
+            angle = UnityEngine.Random.Range(0, 360);
 
         //to implement later
         if(shootAtPlayer)
@@ -49,9 +57,23 @@ public class BulletPattern : ScriptableObject
         float bS = bulletS;
         float bA = bulletA;
         float bJ = bulletJ;
+
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        float pitch = 1;
+
         while (isRunning && t > 0)
         {
             yield return new WaitForSeconds(interv);
+
+            
+            if(audioSource)
+            {
+                audioSource.clip = mySound;
+                audioSource.pitch = pitch;
+                audioSource.volume = 0.125f;
+                audioSource.Play();
+            }
+
             for (int i = 1; i <= amountOfBullets; i++)
             {
                 float ang = (angle - 0.5f * rangeInDegrees - i * rangeInDegrees / (float) amountOfBullets) * Mathf.Deg2Rad;
@@ -67,6 +89,8 @@ public class BulletPattern : ScriptableObject
             angle += rotationS * interv;
             rotationS += rotationA * interv;
             rotationA += rotationJerk * interv;
+
+            pitch += deltaPitch;
 
             //to implement later
             if (shootAtPlayer)
