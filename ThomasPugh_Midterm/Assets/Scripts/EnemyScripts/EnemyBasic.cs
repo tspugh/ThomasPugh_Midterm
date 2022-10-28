@@ -13,6 +13,7 @@ public class EnemyBasic : EnemyBehaviour
     public void Start()
     {
         SetRandomVelocity();
+        gameObject.AddComponent<AudioSource>();
     }
 
     public override void Rotate()
