@@ -18,9 +18,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 70477c0922b3f4a7cad874a600b80158, type: 2}
   - {fileID: 11400000, guid: 24b15b1d9fc7c4cc6bd002715c14f081, type: 2}
   - {fileID: 11400000, guid: 5e50961e156df459388f740d20b80ca5, type: 2}
+  - {fileID: 11400000, guid: 3abfb6edb47b148ceb0e377620ca5b73, type: 2}
+  - {fileID: 11400000, guid: 8720757a22d574a07b712d514173a930, type: 2}
+  - {fileID: 11400000, guid: 80d301ebe448a4e9894ecb8e0354c510, type: 2}
+  - {fileID: 11400000, guid: c0b9abe1b19484a9aaac35708d393d03, type: 2}
+  - {fileID: 11400000, guid: 33336a76592cb4c8ca6c39d3b3103725, type: 2}
+  - {fileID: 11400000, guid: 5d276362755a4407c9c37f4dc84045b9, type: 2}
   potentialMiniboss:
-  - {fileID: 11400000, guid: 5d276362755a4407c9c37f4dc84045b9, type: 2}
+  - {fileID: 11400000, guid: 6254740cc0cf645eea1657201ad39c56, type: 2}
   potentialBoss:
-  - {fileID: 11400000, guid: 5d276362755a4407c9c37f4dc84045b9, type: 2}
+  - {fileID: 11400000, guid: d357d3a63efc34a2b9b71ef920415904, type: 2}
   background: {fileID: 8353908648861383062, guid: 5e560aebd8d0c4d5f935d80ff97d66e6, type: 3}
-  color: {r: 0.674, g: 0.23387797, b: 0.23387797, a: 1}
+  upgrades:
+  - {fileID: 2836266186654448476, guid: a977c5c30b05343dc93b5193603c4ec0, type: 3}
+  - {fileID: 3002629769902963551, guid: 081578fce7342415089e07f15343f38d, type: 3}
+  - {fileID: 3104468042336378790, guid: 02a0c9cee6efa4bd797198ad311365ad, type: 3}
+  material: {fileID: 2100000, guid: a1fb9b2ad6d1a4036bed784d702a3fb1, type: 2}

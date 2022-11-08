@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - EnemyBullet
   - Background
+  - Pickup
   layers:
   - Default
   - TransparentFX
@@ -16,11 +17,11 @@ TagManager:
   - Water
   - UI
   - 
+  - BG
   - 
   - 
   - 
-  - 
-  - 
+  - Player
   - 
   - 
   - 

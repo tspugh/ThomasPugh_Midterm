@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89074f6bf1f804577b7823432ce7dfc0, type: 3}
+  m_Name: Zone1Boss1Pattern2
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 8869565936368721278, guid: d1367ce3024e24800b7334ecd37c6078, type: 3}
+  bulletS: 0
+  bulletA: 20
+  bulletJ: 0
+  deltaS: 0
+  deltaA: 0
+  deltaJ: 0
+  myPosition: {x: -21.081566, y: 12.944462, z: -0.15941173}
+  rangeInDegrees: 180
+  direction: {x: 0, y: 0, z: 0}
+  amountOfBullets: 5
+  deltaAmountOfBullets: 1
+  interval: 0.3
+  deltaInterval: -0.05
+  duration: 0.6
+  rotationSpeed: 200
+  rotationAccel: 0
+  rotationJerk: 0
+  shootAtPlayer: 1
+  continueToShootAtPlayer: 0
+  isRunning: 1
+  randomAngle: 1
+  deltaPitch: 0.07
+  angle: 0
+  mySound: {fileID: 8300000, guid: c817d010b1c2149f0b1f3ab66e7192ae, type: 3}

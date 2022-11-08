@@ -2,6 +2,8 @@
 using UnityEditor;
 using System.Collections;
 using System;
+using static UnityEngine.RuleTile.TilingRuleOutput;
+using UnityEngine.SceneManagement;
 
 public class Trigger
 {
@@ -18,6 +20,7 @@ public class BulletPattern : ScriptableObject
     public float rangeInDegrees; //the spread in which bullets will be created (>=360 is full range)
     public Vector3 direction; //the vector pointing where the center of the range should go
     public int amountOfBullets; //how many bullets are created in one fire
+    public int deltaAmountOfBullets;
 
     public float interval; // the time between each full spread of bullets
     public float deltaInterval;
@@ -28,6 +31,7 @@ public class BulletPattern : ScriptableObject
     public float rotationJerk;
 
     public bool shootAtPlayer;
+    public bool continueToShootAtPlayer;
 
     public bool isRunning = true;
 
@@ -35,74 +39,11 @@ public class BulletPattern : ScriptableObject
 
     public float deltaPitch;
 
+    public float angle;
+
     public AudioClip mySound;
 
-    public IEnumerator InstantiateBullets(GameObject gameObject)
-    {
-        float angle = Vector3.Angle(direction,Vector3.right);
-        if (randomAngle)
-            angle = UnityEngine.Random.Range(0, 360);
-
-        //to implement later
-        if(shootAtPlayer)
-        {
-
-        }
-
-        float rotationS = rotationSpeed;
-        float rotationA = rotationAccel;
-        float t = duration;
-        float interv = interval;
-
-        float bS = bulletS;
-        float bA = bulletA;
-        float bJ = bulletJ;
-
-        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
-        float pitch = 1;
-
-        while (isRunning && t > 0)
-        {
-            yield return new WaitForSeconds(interv);
-
-            
-            if(audioSource)
-            {
-                audioSource.clip = mySound;
-                audioSource.pitch = pitch;
-                audioSource.volume = 0.125f;
-                audioSource.Play();
-            }
-
-            for (int i = 1; i <= amountOfBullets; i++)
-            {
-                float ang = (angle - 0.5f * rangeInDegrees - i * rangeInDegrees / (float) amountOfBullets) * Mathf.Deg2Rad;
-                Vector3 norm = new Vector3(Mathf.Cos(ang), Mathf.Sin(ang), 0);
-                GameObject o = Instantiate(bullet, myPosition, Quaternion.identity) as GameObject;
-                o.SendMessage("InitializeBullet", new BulletInitial(bS * norm, bA * norm, bJ * norm));
-            }
-
-            bS += deltaS*interv;
-            bA += deltaA*interv;
-            bJ += deltaJ * interv;
-
-            angle += rotationS * interv;
-            rotationS += rotationA * interv;
-            rotationA += rotationJerk * interv;
-
-            pitch += deltaPitch;
-
-            //to implement later
-            if (shootAtPlayer)
-            {
-
-            }
-
-            interv = Mathf.Clamp(interv + deltaInterval, 0.01f, Mathf.Infinity);
-            t -= interv;
-        }
-        yield return null;
-    }
+    
 
 }
 

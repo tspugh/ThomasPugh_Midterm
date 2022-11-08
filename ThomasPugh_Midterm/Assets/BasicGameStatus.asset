@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: BasicGameStatus
   m_EditorClassIdentifier: 
   bounded: 0
-  minX: -35.588955
-  maxX: 23.588955
-  minY: -19.128948
+  minX: -35.42115
+  maxX: 23.42115
+  minY: -18.128948
   maxY: 19.128948
   rightXOffset: 12
   uiBasicBounds: 2
+  bottomYOffset: 1

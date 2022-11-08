@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,14 +100,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b001e4d883643b0948986a79e69057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyName: Slider
   velocity: 7
+  maxVelocity: 15
   acceleration: 0
+  maxAcceleration: 0
   velocityDir: {x: 0, y: 0, z: 0}
   accelerationDir: {x: 0, y: 0, z: 0}
   gameStatus: {fileID: 11400000, guid: a5ff2fe6101e949d1939b31940fb8c2d, type: 2}
+  isBoss: 0
   ec: 0
   teleportOffset: 5
   rotateSpeed: 0
+  spawnBulletsOnEdge: 0
 --- !u!61 &7036271261635104226
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -146,12 +151,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecef2571cb61f4c4b95f0e29c06554a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  maxHealth: 20
+  health: 7
+  maxHealth: 7
+  pointValue: 5
   tags:
   - PlayerBullet
   damageTaken: 1
   destructionNoise: {fileID: 8300000, guid: e275382b8984c4acbabc5154470c4338, type: 3}
+  damageNoise: {fileID: 0}
+  hasInvinciblility: 0
+  invincibilityTime: 0
 --- !u!50 &7036271261635104229
 Rigidbody2D:
   serializedVersion: 4

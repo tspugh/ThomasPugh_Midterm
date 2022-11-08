@@ -10,6 +10,8 @@ public class GameManagerScript : MonoBehaviour
     public GameObject zoneManager;
     public GameObject zoneManagersRequiredTextField;
     public GameObject healthBarButThisIsKindaASketchyCall;
+    public GameObject bossHealthBarSketchy;
+    public int maxZone = 1;
 
     public static GameManagerScript myScript;
 
@@ -20,6 +22,7 @@ public class GameManagerScript : MonoBehaviour
     {
         GameEvents.NewGameBegin += OnGameBegin;
         GameEvents.DamagableDestroyed += OnDamageableDestroyed;
+        GameEvents.EnemySpawned += OnEnemySpawned;
         myScript = this;
 
     }
@@ -38,8 +41,8 @@ public class GameManagerScript : MonoBehaviour
             GameObject[] holder = SceneManager.GetActiveScene().GetRootGameObjects();
             foreach (GameObject o in holder)
             {
-                if(!o.CompareTag("Player"))
-                    o.GetComponent<Damageable>()?.DoDestroy();
+                if (!o.CompareTag("Player"))
+                    o.GetComponent<Damageable>()?.SetHealth(0f);
             }
         }
     }
@@ -63,8 +66,9 @@ public class GameManagerScript : MonoBehaviour
         yield return new WaitForSeconds(delay);
         playerHolder = Instantiate(playerObject, Vector3.zero, Quaternion.identity);
         healthBarButThisIsKindaASketchyCall.GetComponent<HealthBar>().monitered = playerHolder;
-        zoneManagerHolder = Instantiate(zoneManager) as GameObject;
+        zoneManagerHolder = Instantiate(zoneManager);
         zoneManagerHolder.GetComponent<ZoneManager>().waveText = zoneManagersRequiredTextField;
+        zoneManagerHolder.GetComponent<ZoneManager>().maxZone = this.maxZone;
         yield return null;
     }
 
@@ -73,7 +77,7 @@ public class GameManagerScript : MonoBehaviour
         GameObject[] holder = SceneManager.GetActiveScene().GetRootGameObjects();
         foreach(GameObject o in holder)
         {
-            if(o.CompareTag("Enemy")||o.CompareTag("Background")||o.CompareTag("Player"))
+            if(o.CompareTag("Enemy")||o.CompareTag("Background")||o.CompareTag("Player")||o.CompareTag("Pickup"))
                 Destroy(o);
         }
         Destroy(zoneManagerHolder);
@@ -83,7 +87,19 @@ public class GameManagerScript : MonoBehaviour
 
     public void TriggerPlayerDeath()
     {
-        playerHolder.GetComponent<Damageable>().DoDestroy();
+        if(playerHolder)
+            playerHolder.GetComponent<Damageable>().health = 0;
+    }
+
+    public void SetBoss(GameObject o)
+    {
+        bossHealthBarSketchy.GetComponent<HealthBar>().monitered = o;
+    }
+
+    public void OnEnemySpawned(object sender, EnemySpawnArgs e)
+    {
+        if (e.enemySpawned.GetComponent<EnemyBehaviour>().isBoss)
+            SetBoss(e.enemySpawned);
     }
 
 }

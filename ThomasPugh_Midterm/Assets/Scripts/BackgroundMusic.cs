@@ -10,7 +10,7 @@ public class BackgroundMusic : MonoBehaviour
     public Soundtrack upper;
 
     public float transitionTime = 1f;
-    private float loopTime = 32f;
+    private float loopTime = 31.8f;
     private float keepTrackTime = 0f;
 
     private AudioSource bass1, bass2, upper1, upper2;
@@ -110,7 +110,6 @@ public class BackgroundMusic : MonoBehaviour
 
     public void SortaFadeTrack(SoundtrackType sound)
     {
-        float time = 0;
         AudioClip bassNewClip = bass.GetTrack(sound);
         AudioClip upperNewClip = upper.GetTrack(sound);
         if (playingMain)

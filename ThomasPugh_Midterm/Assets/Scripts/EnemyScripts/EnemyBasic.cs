@@ -10,9 +10,17 @@ public class EnemyBasic : EnemyBehaviour
     public float teleportOffset = 3;
     public float rotateSpeed;
 
+    public bool spawnBulletsOnEdge;
+
+    protected float vel;
+    protected float accel;
+
     public void Start()
     {
+        GameEvents.InvokeEnemySpawned(gameObject);
         SetRandomVelocity();
+        vel = Random.Range(velocity, maxVelocity);
+        accel = Random.Range(acceleration, maxAcceleration);
         gameObject.AddComponent<AudioSource>();
     }
 
@@ -23,7 +31,7 @@ public class EnemyBasic : EnemyBehaviour
 
     public override void Translate()
     {
-        transform.position += velocity * velocityDir * Time.deltaTime;
+        transform.position += vel * velocityDir * Time.deltaTime;
         if (ec == edgeCase.bounce)
             Bounce();
         else if (ec == edgeCase.teleport)
@@ -40,45 +48,63 @@ public class EnemyBasic : EnemyBehaviour
 
     public void Bounce()
     {
-        if(transform.position.x > gameStatus.maxX)
+        Collider2D coll = GetComponent<Collider2D>();
+        if(transform.position.x + coll.bounds.extents.x/2 > gameStatus.maxX)
         {
-            transform.position = new Vector3(gameStatus.maxX, transform.position.y, transform.position.z);
+            transform.position = new Vector3(gameStatus.maxX - coll.bounds.extents.x/2, transform.position.y, transform.position.z);
             velocityDir = new Vector3(-velocityDir.x, velocityDir.y, velocityDir.z);
+            if(spawnBulletsOnEdge)
+                GetComponent<BulletSpawner>().RunPatternOnce();
         }
-        if (transform.position.x < gameStatus.minX)
+        if (transform.position.x - coll.bounds.extents.x/2 < gameStatus.minX)
         {
-            transform.position = new Vector3(gameStatus.minX, transform.position.y, transform.position.z);
+            transform.position = new Vector3(gameStatus.minX + coll.bounds.extents.x/2, transform.position.y, transform.position.z);
             velocityDir = new Vector3(-velocityDir.x, velocityDir.y, velocityDir.z);
+            if (spawnBulletsOnEdge)
+                GetComponent<BulletSpawner>().RunPatternOnce();
         }
-        if (transform.position.y > gameStatus.maxY)
+        if (transform.position.y + coll.bounds.extents.y/2 > gameStatus.maxY)
         {
-            transform.position = new Vector3(transform.position.x, gameStatus.maxY, transform.position.z);
+            transform.position = new Vector3(transform.position.x, gameStatus.maxY - coll.bounds.extents.y/2, transform.position.z);
             velocityDir = new Vector3(velocityDir.x, -velocityDir.y, velocityDir.z);
+            if (spawnBulletsOnEdge)
+                GetComponent<BulletSpawner>().RunPatternOnce();
         }
-        if (transform.position.y < gameStatus.minY)
+        if (transform.position.y - coll.bounds.extents.y/2 < gameStatus.minY)
         {
-            transform.position = new Vector3(transform.position.x, gameStatus.minY, transform.position.z);
+            transform.position = new Vector3(transform.position.x, gameStatus.minY + coll.bounds.extents.y/2, transform.position.z);
             velocityDir = new Vector3(velocityDir.x, -velocityDir.y, velocityDir.z);
+            if (spawnBulletsOnEdge)
+                GetComponent<BulletSpawner>().RunPatternOnce();
         }
     }
 
     public void Teleport()
     {
-        if (transform.position.x > gameStatus.maxX+teleportOffset)
+        Collider2D coll = GetComponent<Collider2D>();
+        if (transform.position.x - coll.bounds.extents.x/2 > gameStatus.maxX)
         {
-            transform.position = new Vector3(gameStatus.minX-teleportOffset, transform.position.y, transform.position.z);
+            transform.position = new Vector3(gameStatus.minX-coll.bounds.extents.x/2, transform.position.y, transform.position.z);
+            if (spawnBulletsOnEdge)
+                GetComponent<BulletSpawner>().RunPatternOnce();
         }
-        if (transform.position.x < gameStatus.minX-teleportOffset)
+        if (transform.position.x + coll.bounds.extents.x/2 < gameStatus.minX)
         {
-            transform.position = new Vector3(gameStatus.maxX+teleportOffset, transform.position.y, transform.position.z);
+            transform.position = new Vector3(gameStatus.maxX+coll.bounds.extents.x/2, transform.position.y, transform.position.z);
+            if (spawnBulletsOnEdge)
+                GetComponent<BulletSpawner>().RunPatternOnce();
         }
-        if (transform.position.y > gameStatus.maxY+teleportOffset)
+        if (transform.position.y - coll.bounds.extents.y/2 > gameStatus.maxY)
         {
-            transform.position = new Vector3(transform.position.x, gameStatus.minY-teleportOffset, transform.position.z);
+            transform.position = new Vector3(transform.position.x, gameStatus.minY- coll.bounds.extents.y/2, transform.position.z);
+            if (spawnBulletsOnEdge)
+                GetComponent<BulletSpawner>().RunPatternOnce();
         }
-        if (transform.position.y < gameStatus.minY-teleportOffset)
+        if (transform.position.y + coll.bounds.extents.y/2 < gameStatus.minY)
         {
-            transform.position = new Vector3(transform.position.x, gameStatus.maxY+teleportOffset, transform.position.z);
+            transform.position = new Vector3(transform.position.x, gameStatus.maxY+ coll.bounds.extents.y/2, transform.position.z);
+            if (spawnBulletsOnEdge)
+                GetComponent<BulletSpawner>().RunPatternOnce();
         }
     }
 }

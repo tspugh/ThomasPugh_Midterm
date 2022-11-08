@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89074f6bf1f804577b7823432ce7dfc0, type: 3}
+  m_Name: TurretPattern
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 5212484419684267555, guid: f18d187b9fe944fbcb3523305bb6b65e, type: 3}
+  bulletS: 50
+  bulletA: 0
+  bulletJ: 0
+  deltaS: 0
+  deltaA: 0
+  deltaJ: 0
+  myPosition: {x: 0.5610893, y: 14.304972, z: 0}
+  rangeInDegrees: 0
+  direction: {x: -0.59755063, y: -32.365578, z: 0}
+  amountOfBullets: 1
+  deltaAmountOfBullets: 0
+  interval: 0.3
+  deltaInterval: 0
+  duration: 0.3
+  rotationSpeed: 0
+  rotationAccel: 0
+  rotationJerk: 0
+  shootAtPlayer: 0
+  continueToShootAtPlayer: 0
+  isRunning: 1
+  randomAngle: 0
+  deltaPitch: 0
+  angle: -86.01847
+  mySound: {fileID: 0}

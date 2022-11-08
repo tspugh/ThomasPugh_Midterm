@@ -8,9 +8,6 @@ public enum MenuType { StartMenu, Intermediate, MainGame }
 public class MenuManager : MonoBehaviour
 {
 
-    public float screenWidth = 825f;
-    public float screenHeight = 400f;
-
     public RectTransform menuThing;
 
     public float transitionTime = .75f;
@@ -30,9 +27,9 @@ public class MenuManager : MonoBehaviour
     void ChangeMenuType(MenuType menu)
     {
         if (menu == MenuType.Intermediate)
-            destination = new Vector3(-screenWidth, 0f, 0f);
+            destination = new Vector3(-Screen.width, 0f, 0f);
         else if (menu == MenuType.MainGame)
-            destination = new Vector3(-screenWidth, screenHeight, 0f);
+            destination = new Vector3(-Screen.width, Screen.height, 0f);
         else
             destination = new Vector3(0f, 0f, 0f);
 

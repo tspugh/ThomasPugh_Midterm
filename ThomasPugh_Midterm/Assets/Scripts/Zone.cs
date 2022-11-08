@@ -11,7 +11,8 @@ public class Zone : ScriptableObject
     public Wave[] potentialMiniboss;
     public Wave[] potentialBoss;
     public GameObject background;
-    public Color color;
+    public GameObject[] upgrades;
+    public Material material;
 
     public int GetMaxDifficulty()
     {
@@ -25,7 +26,7 @@ public class Zone : ScriptableObject
 
     public Wave GetNextWave(int value)
     {
-        int maxDifficulty = Mathf.CeilToInt(GetMaxDifficulty()*(value/length));
+        int maxDifficulty = Mathf.CeilToInt(GetMaxDifficulty()*(value/(length+1)))+1;
         if (value <= length / 2 - 1 || (value > length / 2 && value < length+1))
         {
             //messy warning

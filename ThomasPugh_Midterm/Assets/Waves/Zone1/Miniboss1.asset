@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Miniboss1
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 2883650864803312726, guid: 4cb9acf70c68e4e418d20c81de30d2b4, type: 3}
+  - {fileID: 3436077740523993212, guid: 3fd09e0818fdc4084abd2fea69d62332, type: 3}
+  - {fileID: 7871180117447188471, guid: 5fb3ac4d26b014acfa2463f13436a013, type: 3}
+  - {fileID: 3924429023170018464, guid: a132532f6c5fd497a92b2db5d897daa9, type: 3}
+  - {fileID: 8382498653413988836, guid: 5e6e12f5889a147afb56c3463f426950, type: 3}
   difficulty: 0
