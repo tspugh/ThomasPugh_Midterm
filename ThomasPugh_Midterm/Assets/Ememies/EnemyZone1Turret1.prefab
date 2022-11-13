@@ -152,14 +152,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecef2571cb61f4c4b95f0e29c06554a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  maxHealth: 10
+  behaveNormally: 1
+  health: 8
+  maxHealth: 12
   pointValue: 6
   tags:
   - PlayerBullet
   damageTaken: 1
   destructionNoise: {fileID: 8300000, guid: e275382b8984c4acbabc5154470c4338, type: 3}
-  damageNoise: {fileID: 0}
+  damageNoise: {fileID: 8300000, guid: 896e86c84c46c44c68de05533d32b7af, type: 3}
   hasInvinciblility: 0
   invincibilityTime: 0
 --- !u!50 &3640709075351110265

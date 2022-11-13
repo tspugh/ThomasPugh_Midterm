@@ -38,7 +38,7 @@ public class EnemyTurretHandler : MonoBehaviour
             o.GetComponent<SpriteRenderer>().material = GetComponent<SpriteRenderer>().material;
             o.GetComponent<Damageable>().maxHealth /= 2;
             float angle = time * Mathf.PI * 2 / rotationPeriod + i * Mathf.PI * 2 / turretsPresent.Count;
-            o.transform.position = transform.position + new Vector3(Mathf.Cos(angle),Mathf.Sin(angle),0f)*radius;
+            o.transform.position = transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * radius;
         }
         time += Time.deltaTime;
         if(time > (Mathf.PI * 12 / rotationPeriod))

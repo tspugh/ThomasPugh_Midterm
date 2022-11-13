@@ -14,6 +14,8 @@ public class Zone : ScriptableObject
     public GameObject[] upgrades;
     public Material material;
 
+    private List<Wave> givenWaves;
+
     public int GetMaxDifficulty()
     {
         int max = 0;
@@ -26,19 +28,38 @@ public class Zone : ScriptableObject
 
     public Wave GetNextWave(int value)
     {
-        int maxDifficulty = Mathf.CeilToInt(GetMaxDifficulty()*(value/(length+1)))+1;
+        if (givenWaves == null || value == 0)
+            givenWaves = new List<Wave>();
+        int maxDifficulty = Mathf.CeilToInt(GetMaxDifficulty()*((float)value/(length+1f)))+1;
+        int minDifficulty = Mathf.Min(Mathf.FloorToInt((value * 2 / (length + 1))), GetMaxDifficulty()-1)+1;
         if (value <= length / 2 - 1 || (value > length / 2 && value < length+1))
         {
             //messy warning
-            if(value > length / 2)
+            if(value > length / 2 && value < length / 2 + 1)
                 GameEvents.InvokeChangeSoundtrack(SoundtrackType.Transition);
 
             List<Wave> temp = new List<Wave>(potentialWaves);
             while (temp.Count > 0)
             {
                 int ind = Random.Range(0, temp.Count);
-                if (temp[ind].difficulty <= maxDifficulty)
+                if (temp[ind].difficulty <= maxDifficulty && temp[ind].difficulty>=minDifficulty && !givenWaves.Contains(temp[ind]))
                 {
+                    givenWaves.Add(temp[ind]);
+                    return temp[ind];
+                }
+                else
+                {
+                    temp.RemoveAt(ind);
+                }
+            }
+
+            temp = new List<Wave>(potentialWaves);
+            while (temp.Count > 0)
+            {
+                int ind = Random.Range(0, temp.Count);
+                if (temp[ind].difficulty <= maxDifficulty && temp[ind].difficulty >= minDifficulty)
+                {
+                    givenWaves.Add(temp[ind]);
                     return temp[ind];
                 }
                 else

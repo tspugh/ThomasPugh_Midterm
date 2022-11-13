@@ -13,6 +13,8 @@ public class SaveData
     public int currency;
     public int maxZone;
     public int[] goalsCompleted;
+    public int[] activeGoals;
     public bool goalsUnlocked;
+    
 }
 

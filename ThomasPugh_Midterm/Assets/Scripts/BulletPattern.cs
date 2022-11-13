@@ -15,6 +15,7 @@ public class BulletPattern : ScriptableObject
 {
     public GameObject bullet; //the bullet to be created
     public float bulletS, bulletA, bulletJ; //the bullet speed, accel, and jerk respectively
+    public float bulletAAngle, bulletJAngle; // offset angle from speed of the accel/jerk
     public float deltaS, deltaA, deltaJ;
     public Vector3 myPosition;
     public float rangeInDegrees; //the spread in which bullets will be created (>=360 is full range)
@@ -32,10 +33,12 @@ public class BulletPattern : ScriptableObject
 
     public bool shootAtPlayer;
     public bool continueToShootAtPlayer;
+    public float motionDir = 0;
 
     public bool isRunning = true;
 
     public bool randomAngle = true;
+    public bool overrideAngle = false;
 
     public float deltaPitch;
 

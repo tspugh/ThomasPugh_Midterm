@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c54971ebcc204d6bb59c96683968a27, type: 3}
+  m_Name: 2Wave12
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 2998969242723103505, guid: 936c8ebd9b8244fdca67bad073b58554, type: 3}
+  - {fileID: 7871180117447188471, guid: 5fb3ac4d26b014acfa2463f13436a013, type: 3}
+  - {fileID: 3924429023170018464, guid: a132532f6c5fd497a92b2db5d897daa9, type: 3}
+  difficulty: 3

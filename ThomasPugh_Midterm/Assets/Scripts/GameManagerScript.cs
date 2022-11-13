@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManagerScript : MonoBehaviour
 {
 
-    public GameObject playerObject;
+    public GameObject[] playerObjects;
+    public int playerIndex = 0;
     public GameObject zoneManager;
     public GameObject zoneManagersRequiredTextField;
     public GameObject healthBarButThisIsKindaASketchyCall;
@@ -18,9 +19,12 @@ public class GameManagerScript : MonoBehaviour
     private GameObject zoneManagerHolder;
     private GameObject playerHolder;
 
+    public AudioClip endRoundClip;
+
     private void Awake()
     {
         GameEvents.NewGameBegin += OnGameBegin;
+        GameEvents.GameOver += OnGameOver;
         GameEvents.DamagableDestroyed += OnDamageableDestroyed;
         GameEvents.EnemySpawned += OnEnemySpawned;
         myScript = this;
@@ -30,13 +34,16 @@ public class GameManagerScript : MonoBehaviour
 
     void Start()
     {
-        
+        if(endRoundClip)
+        {
+            AudioSource a = gameObject.AddComponent<AudioSource>();
+            a.clip = endRoundClip;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void AllowInstantDeath()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             GameObject[] holder = SceneManager.GetActiveScene().GetRootGameObjects();
             foreach (GameObject o in holder)
@@ -45,6 +52,12 @@ public class GameManagerScript : MonoBehaviour
                     o.GetComponent<Damageable>()?.SetHealth(0f);
             }
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        AllowInstantDeath();
     }
 
     void OnGameBegin(object sender, NewGameArgs e)
@@ -57,14 +70,14 @@ public class GameManagerScript : MonoBehaviour
     {
         if(e.destroyedGameObject.CompareTag("Player"))
         {
-            EndRound();
+            StartCoroutine(EndRound());
         }
     }
 
     private IEnumerator SpawnGame(float delay)
     {
         yield return new WaitForSeconds(delay);
-        playerHolder = Instantiate(playerObject, Vector3.zero, Quaternion.identity);
+        playerHolder = Instantiate(playerObjects[playerIndex], Vector3.zero, Quaternion.identity);
         healthBarButThisIsKindaASketchyCall.GetComponent<HealthBar>().monitered = playerHolder;
         zoneManagerHolder = Instantiate(zoneManager);
         zoneManagerHolder.GetComponent<ZoneManager>().waveText = zoneManagersRequiredTextField;
@@ -72,23 +85,20 @@ public class GameManagerScript : MonoBehaviour
         yield return null;
     }
 
-    public void EndRound()
+    public IEnumerator EndRound()
     {
+        yield return new WaitForEndOfFrame();
+        
         GameObject[] holder = SceneManager.GetActiveScene().GetRootGameObjects();
+        GameEvents.InvokeGameOver(false);
         foreach(GameObject o in holder)
         {
-            if(o.CompareTag("Enemy")||o.CompareTag("Background")||o.CompareTag("Player")||o.CompareTag("Pickup"))
+            if(o.CompareTag("Enemy") || o.CompareTag("Background") || o.CompareTag("Player") || o.CompareTag("Pickup"))
                 Destroy(o);
         }
         Destroy(zoneManagerHolder);
         GameEvents.InvokeChangeSoundtrack(SoundtrackType.Menu);
-
-    }
-
-    public void TriggerPlayerDeath()
-    {
-        if(playerHolder)
-            playerHolder.GetComponent<Damageable>().health = 0;
+        yield return null;
     }
 
     public void SetBoss(GameObject o)
@@ -100,6 +110,17 @@ public class GameManagerScript : MonoBehaviour
     {
         if (e.enemySpawned.GetComponent<EnemyBehaviour>().isBoss)
             SetBoss(e.enemySpawned);
+    }
+
+    public void OnGameOver(object sender, GameOverArgs e)
+    {
+        if(e.won)
+            gameObject.GetComponent<AudioSource>().Play();
+    }
+
+    public void IncreasePlayerIndex()
+    {
+        playerIndex = (playerIndex + 1) % playerObjects.Length;
     }
 
 }

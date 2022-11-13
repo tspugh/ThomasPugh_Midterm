@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c54971ebcc204d6bb59c96683968a27, type: 3}
+  m_Name: 2Wave13
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 3526409945319423155, guid: d196b6f5116e447f19d199c88cb0d114, type: 3}
+  - {fileID: 3526409945319423155, guid: d196b6f5116e447f19d199c88cb0d114, type: 3}
+  difficulty: 2

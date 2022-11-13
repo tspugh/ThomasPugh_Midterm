@@ -115,6 +115,9 @@ MonoBehaviour:
   teleportOffset: 3
   rotateSpeed: 0
   spawnBulletsOnEdge: 0
+  isSnake: 0
+  snakeAmount: 0
+  snakeDelay: 0
 --- !u!50 &3266266186479352876
 Rigidbody2D:
   serializedVersion: 4
@@ -146,7 +149,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -164,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecef2571cb61f4c4b95f0e29c06554a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  behaveNormally: 1
   health: 57
   maxHealth: 57
   pointValue: 141
@@ -171,7 +175,7 @@ MonoBehaviour:
   - PlayerBullet
   damageTaken: 1
   destructionNoise: {fileID: 8300000, guid: 6b128f98e5a924507a0d140fa10e2b82, type: 3}
-  damageNoise: {fileID: 0}
+  damageNoise: {fileID: 8300000, guid: 896e86c84c46c44c68de05533d32b7af, type: 3}
   hasInvinciblility: 0
   invincibilityTime: 0
 --- !u!114 &3266266186479352865

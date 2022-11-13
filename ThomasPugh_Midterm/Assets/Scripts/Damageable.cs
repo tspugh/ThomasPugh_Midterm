@@ -5,6 +5,8 @@ using UnityEngine;
 public class Damageable : MonoBehaviour
 {
 
+    public bool behaveNormally = true;
+
     public float health;
     public float maxHealth;
     public int pointValue;
@@ -18,23 +20,36 @@ public class Damageable : MonoBehaviour
 
     private bool isInvincibile;
 
-    private void Start()
+    private void Awake()
     {
-        isInvincibile = false;
+        GameEvents.GameOver += OnGameOver;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    public virtual void Start()
     {
-        
-        foreach(string tag in tags)
+        isInvincibile = false;
+        if(health!=maxHealth)
+        {
+            maxHealth = Mathf.Round(Random.Range(health, maxHealth));
+            health = maxHealth;
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (behaveNormally)
+            DoCollision(collision);
+    }
+
+    public void DoCollision(Collider2D collision)
+    {
+        foreach (string tag in tags)
         {
             if (collision.gameObject.CompareTag(tag) && !isInvincibile)
             {
-                if(hasInvinciblility)
+                if (hasInvinciblility)
                     StartCoroutine(InvincibleTimer());
                 Damage(damageTaken);
-                if(damageNoise!=null)
-                    AudioSource.PlayClipAtPoint(damageNoise, Camera.main.transform.position + new Vector3(0f, 0f, 1f), 0.125f);
                 if (tag.Contains("Bullet"))
                     Destroy(collision.gameObject);
             }
@@ -49,9 +64,11 @@ public class Damageable : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Damage(float damage)
+    public virtual void Damage(float damage)
     {
         health -= damage;
+        if(damageNoise)
+            AudioSource.PlayClipAtPoint(damageNoise, Camera.main.transform.position + new Vector3(0f, 0f, 1f), gameObject.CompareTag("Player")? 0.20f : 0.050f);
     }
 
     public void SetHealth(float health)
@@ -92,5 +109,10 @@ public class Damageable : MonoBehaviour
             yield return null;
         }
         isInvincibile = false;
+    }
+
+    public void OnGameOver(object sender, GameOverArgs e)
+    {
+        SetHealth(0);
     }
 }

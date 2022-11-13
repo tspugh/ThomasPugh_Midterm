@@ -15,7 +15,7 @@ public class BulletInitial
 
 public class BulletBehaviour : MonoBehaviour
 {
-
+    public float bulletBounds = 50;
     public Vector3 velocity, acceleration, jerk;
 
     public virtual void Translate()
@@ -24,20 +24,28 @@ public class BulletBehaviour : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Awake()
+    public virtual void Awake()
     {
         InitializeBullet(new BulletInitial(Vector3.zero, Vector3.zero, Vector3.zero));
+    }
+
+    public void Start()
+    {
+        DoOnStart();
     }
 
     public virtual void Rotate()
     { }
 
+    public virtual void DoOnStart()
+    { }
+
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         Rotate();
         Translate();
-        if (Bounds.IsOutsideBounds(transform.position, 50f))
+        if (Bounds.IsOutsideBounds(transform.position, bulletBounds))
             Destroy(gameObject);
 
     }

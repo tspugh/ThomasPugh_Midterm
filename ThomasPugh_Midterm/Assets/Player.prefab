@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34dbb867fd3624f5db986bdb9adabb57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 3
+  mouseSensitivity: 5
   bulletSpeed: 50
   gameStatus: {fileID: 11400000, guid: a5ff2fe6101e949d1939b31940fb8c2d, type: 2}
   velocity: {x: 0, y: 0, z: 0}
@@ -156,7 +156,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b1632f3d7047846eab236cd317ebfa91, type: 2}
   weights:
   - 1
-  interval: 0
+  interval: 0.2
   spawnOnStart: 1
   isSpawningBullets: 1
 --- !u!114 &7175107363750238338
@@ -179,7 +179,7 @@ MonoBehaviour:
   - Enemy
   damageTaken: 1
   destructionNoise: {fileID: 8300000, guid: bd80d1ef60e4543d98e973da532e78b3, type: 3}
-  damageNoise: {fileID: 0}
+  damageNoise: {fileID: 8300000, guid: 435bc0121e2ad4eab995a19413d1a769, type: 3}
   hasInvinciblility: 1
   invincibilityTime: 0.75
 --- !u!50 &7175107363750238339
@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec614d314de346bb8863373034d7d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gotPickup: 0
   playerController: {fileID: 7175107363750238342}
 --- !u!114 &1179415327764744368
 MonoBehaviour:
@@ -265,13 +266,37 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_Vertices:
-  - position: {x: 0, y: 0, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 0}
+  - position: {x: 0.9985302, y: 0.9985302, z: 0}
+    color: {r: 0.70710677, g: 0.70710677, b: 0, a: 0}
     uv: {x: 0, y: 0}
-  m_Triangles: 0000
+  - position: {x: 0.9985302, y: 0.9985302, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 1}
+    uv: {x: 0, y: 0}
+  - position: {x: -0.9985302, y: 0.9985302, z: 0}
+    color: {r: -0.70710677, g: 0.70710677, b: 0, a: 0}
+    uv: {x: 0, y: 0}
+  - position: {x: -0.9985302, y: 0.9985302, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 1}
+    uv: {x: 0, y: 0}
+  - position: {x: -0.99853003, y: -0.9985304, z: 0}
+    color: {r: -0.70710665, g: -0.7071069, b: 0, a: 0}
+    uv: {x: 0, y: 0}
+  - position: {x: -0.99853003, y: -0.9985304, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 1}
+    uv: {x: 0, y: 0}
+  - position: {x: 0.99853003, y: -0.9985304, z: 0}
+    color: {r: 0.70710665, g: -0.7071069, b: 0, a: 0}
+    uv: {x: 0, y: 0}
+  - position: {x: 0.99853003, y: -0.9985304, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 1}
+    uv: {x: 0, y: 0}
+  - position: {x: 0, y: 0, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 1}
+    uv: {x: 0, y: 0}
+  m_Triangles: 030001000800020000000100030002000100050003000800040002000300050004000300070005000800060004000500070006000500010007000800000006000700010000000700
   m_LocalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

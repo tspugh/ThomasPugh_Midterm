@@ -5,7 +5,6 @@ public class BulletBasic : BulletBehaviour
 {
 	public override void Translate()
     {
-        
         transform.position += velocity * Time.deltaTime;
         velocity += (acceleration) * Time.deltaTime;
         acceleration += jerk * Time.deltaTime;

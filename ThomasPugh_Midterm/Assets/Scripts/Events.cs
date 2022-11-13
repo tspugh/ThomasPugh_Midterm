@@ -30,6 +30,11 @@ public class EnemySpawnArgs : EventArgs
     public GameObject enemySpawned;
 }
 
+public class GameOverArgs : EventArgs
+{
+    public bool won;
+}
+
 
 public static class GameEvents
 {
@@ -43,35 +48,55 @@ public static class GameEvents
 
     public static event EventHandler<EnemySpawnArgs> EnemySpawned;
 
+    public static event EventHandler<GameOverArgs> GameOver;
+
+    public static event EventHandler<ScoreArgs> IncreaseCurrency;
+
     public static void InvokeDamagableDestroyed(GameObject o)
     {
-        if(DamagableDestroyed!=null)
+        if (DamagableDestroyed != null)
             DamagableDestroyed(null, new DestructionArgs { destroyedGameObject = o });
     }
 
     public static void InvokeNewGameBegin(float enteredDelay)
     {
-        if(NewGameBegin!=null)
+        if (NewGameBegin != null)
             NewGameBegin(null, new NewGameArgs { delay = enteredDelay });
     }
 
     public static void InvokeChangeSoundtrack(SoundtrackType s)
     {
-        if(ChangeSoundtrack != null)
+        if (ChangeSoundtrack != null)
             ChangeSoundtrack(null, new SoundArgs { newSoundtrack = s });
     }
 
     public static void InvokeIncreaseScore(int scoreIncrease, bool reset)
     {
-        if(IncreaseScore!=null)
+        if (IncreaseScore != null)
             IncreaseScore(null, new ScoreArgs { score = scoreIncrease, resetScore = reset });
     }
 
     public static void InvokeEnemySpawned(GameObject ene)
     {
-        if(EnemySpawned != null)
+        if (EnemySpawned != null)
         {
             EnemySpawned(null, new EnemySpawnArgs { enemySpawned = ene });
+        }
+    }
+
+    public static void InvokeGameOver(bool wasWon)
+    {
+        if (GameOver != null)
+        {
+            GameOver(null, new GameOverArgs { won = wasWon });
+        }
+    }
+
+    public static void InvokeIncreaseCurrency(int currency)
+    {
+        if(IncreaseCurrency!= null)
+        {
+            IncreaseCurrency(null, new ScoreArgs { score = currency });
         }
     }
 }

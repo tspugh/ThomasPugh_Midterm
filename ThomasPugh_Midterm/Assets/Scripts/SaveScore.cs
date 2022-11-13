@@ -17,6 +17,7 @@ public class SaveScore : MonoBehaviour
     public Goal[] goals;
 
     public List<int> goalsComplete;
+    public List<int> activeGoals;
 
     public int[] nextZonePrice;
 
@@ -42,6 +43,7 @@ public class SaveScore : MonoBehaviour
         save.currency = currency;
         save.maxZone = maxZone;
         save.goalsUnlocked = this.goalsUnlocked;
+        save.activeGoals = this.activeGoals.ToArray();
         save.goalsCompleted = this.goalsComplete.ToArray();
 
         bf.Serialize(file, save);
@@ -61,7 +63,7 @@ public class SaveScore : MonoBehaviour
             this.highScore = save.highScore;
             this.currency = save.currency;
             this.maxZone = save.maxZone;
-
+            this.activeGoals = new List<int>(activeGoals);
             this.goalsUnlocked = save.goalsUnlocked;
             this.goalsComplete = new List<int>(save.goalsCompleted);
         }
@@ -106,6 +108,11 @@ public class SaveScore : MonoBehaviour
         }
     }
 
+    public void OnIncreaseCurrency(object sender, ScoreArgs e)
+    {
+        currency += e.score;
+    }
+
     public void BuyNextZone()
     {
         if (nextZonePrice.Length >= maxZone && currency >= nextZonePrice[maxZone-1])
@@ -114,39 +121,4 @@ public class SaveScore : MonoBehaviour
             maxZone++;
         }
     }
-
-
-    //returns a random goal from the potential goals, excluding completed goals.
-    //If there are no goals left ungiven,
-    //returns null.
-
-    //NOTE TO FIX: There is a chance for it to randomly not give a goal even though there are still goals left.
-    public Goal GetNewGoal()
-    {
-        int tries = 1000*(goals.Length-goalsComplete.Count);
-        Goal goaltogive = null;
-        while(tries > 0)
-        {
-            int choice = UnityEngine.Random.Range(0, goals.Length);
-            if(!goalsComplete.Contains(choice))
-            {
-                tries = 0;
-                goaltogive = goals[choice];
-            }
-            tries--;
-        }
-        return goaltogive;
-    }
-
-    //adds a completed goal to the completed goal list stored in this object
-    public void AddGoalCompleted(Goal goal)
-    {
-        for(int i = 0; i<goals.Length; i++)
-        {
-            if (goals[i].Equals(goal))
-                goalsComplete.Add(i);
-        }
-    }
-
-    
 }

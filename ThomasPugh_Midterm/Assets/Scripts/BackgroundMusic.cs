@@ -10,7 +10,7 @@ public class BackgroundMusic : MonoBehaviour
     public Soundtrack upper;
 
     public float transitionTime = 1f;
-    private float loopTime = 31.8f;
+    private float loopTime = 32f;
     private float keepTrackTime = 0f;
 
     private AudioSource bass1, bass2, upper1, upper2;
@@ -137,14 +137,43 @@ public class BackgroundMusic : MonoBehaviour
 
     public void Update()
     {
-
         keepTrackTime += Time.deltaTime;
-        if (keepTrackTime >= loopTime)
+        if ((playingMain && bass1.time >= loopTime)|| (!playingMain && bass2.time >= loopTime))
         {
             keepTrackTime = 0;
             if (currentSound == SoundtrackType.Intro)
                 currentSound = SoundtrackType.Menu;
             RestartTrack(currentSound);
+        }
+    }
+
+    public void OnGameOver(object sender, GameOverArgs e)
+    {
+        if (e.won)
+            DuckAudio(7f);
+    }
+
+    public void DuckAudio(float seconds)
+    {
+        StartCoroutine(Ducker(seconds));
+    }
+
+    public IEnumerator Ducker(float seconds)
+    {
+        float time = 0;
+        while(time<=seconds)
+        {
+            float volume;
+            if(time<0.01)
+            {
+                volume = Mathf.Lerp(1, 0, time / 0.01f);
+            }
+            else
+            {
+                volume = Mathf.Lerp(0, 1, (time - 0.01f) / (seconds - 0.01f));
+            }
+            time += Time.deltaTime;
+            yield return null;
         }
     }
 }

@@ -23,6 +23,7 @@ MonoBehaviour:
   rangeInDegrees: 360
   direction: {x: 0, y: -10, z: 0}
   amountOfBullets: 20
+  deltaAmountOfBullets: 0
   interval: 1
   deltaInterval: -0.03
   duration: 12
@@ -30,4 +31,11 @@ MonoBehaviour:
   rotationAccel: -1
   rotationJerk: 0
   shootAtPlayer: 0
+  continueToShootAtPlayer: 0
+  motionDir: 0
   isRunning: 1
+  randomAngle: 1
+  overrideAngle: 0
+  deltaPitch: 0
+  angle: 0
+  mySound: {fileID: 0}

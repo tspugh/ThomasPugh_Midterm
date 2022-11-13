@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: be3664a0316c54ec48ed8cf2e234c9ef, type: 3}
   m_Name: Beat2Sliders
   m_EditorClassIdentifier: Assembly-CSharp::Goal
   goalType: 00000000
@@ -17,4 +17,5 @@ MonoBehaviour:
   enemyAmount: 2
   waveAmount: 0
   zoneAmount: 0
-  timedInterval: 0
+  timedInterval: -1
+  currencyValue: 25

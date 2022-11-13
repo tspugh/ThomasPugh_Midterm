@@ -119,17 +119,25 @@ public class BulletSpawner : MonoBehaviour
     public virtual IEnumerator InstantiateBullets(BulletPattern pat)
     {
         Vector3 direction;
+        float angle = pat.angle;
         //to implement later
         if (pat.shootAtPlayer)
         {
             direction = -transform.position + GetNearestPlayer();
+            angle = Mathf.Asin(direction.y / direction.magnitude) * Mathf.Rad2Deg;
+            if (direction.x < 0)
+                angle = 180 - angle;
         }
-        else
-            direction = new Vector3(Random.Range(0f, 2f) - 1f, Random.Range(0f, 2f) - 1f, 0);
-
-        float angle = Mathf.Asin(direction.y / direction.magnitude) * Mathf.Rad2Deg;
-        if (direction.x < 0)
-            angle = 180 - angle;
+        else if(pat.motionDir!=0)
+        {
+            direction = pat.motionDir * GetComponent<EnemyBehaviour>().velocityDir;
+            if (direction.magnitude == 0)
+                angle = pat.angle;
+            else
+                angle = Mathf.Asin(direction.y / direction.magnitude) * Mathf.Rad2Deg;
+            if (direction.x < 0)
+                angle = 180 - angle;
+        }
 
         if (pat.randomAngle)
             angle = UnityEngine.Random.Range(0, 360);
@@ -169,7 +177,9 @@ public class BulletSpawner : MonoBehaviour
                 float ang = (angle - 0.5f * pat.rangeInDegrees + i * pat.rangeInDegrees / (float)aOB) * Mathf.Deg2Rad;
                 Vector3 norm = new Vector3(Mathf.Cos(ang), Mathf.Sin(ang), 0);
                 GameObject o = Instantiate(pat.bullet, transform.position, Quaternion.identity) as GameObject;
-                o.SendMessage("InitializeBullet", new BulletInitial(bS * norm, bA * norm, bJ * norm));
+                Vector3 normA = Quaternion.AngleAxis(pat.bulletAAngle, Vector3.back) * norm;
+                Vector3 normJ = Quaternion.AngleAxis(pat.bulletJAngle, Vector3.back) * norm;
+                o.SendMessage("InitializeBullet", new BulletInitial(bS * norm, bA * normA, bJ * normJ));
             }
 
             bS += pat.deltaS * interv;
@@ -193,8 +203,23 @@ public class BulletSpawner : MonoBehaviour
                 direction = -transform.position + GetNearestPlayer();
                 angle = Mathf.Asin(direction.y / direction.magnitude) * Mathf.Rad2Deg;
                 if (direction.x < 0)
-                    angle = 180 - angle;
+                    pat.angle = 180 - pat.angle;
 
+            }
+            else if (pat.motionDir != 0)
+            {
+                direction = pat.motionDir * GetComponent<EnemyBehaviour>().velocityDir;
+                if (direction.magnitude == 0)
+                    angle = pat.angle;
+                else
+                    angle = Mathf.Asin(direction.y / direction.magnitude) * Mathf.Rad2Deg;
+                if (direction.x < 0)
+                    angle = 180 - angle;
+            }
+
+            if (pat.overrideAngle)
+            {
+                pat.angle = angle;
             }
 
             interv = Mathf.Clamp(interv + pat.deltaInterval, 0.01f, Mathf.Infinity);
@@ -202,6 +227,7 @@ public class BulletSpawner : MonoBehaviour
         }
         yield return null;
     }
+
 
     public Vector3 GetNearestPlayer()
     {

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -5879071623527211062}
   m_Layer: 0
   m_Name: ZoneManager
-  m_TagString: Untagged
+  m_TagString: ZoneManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   currentZone: 0
   currentWave: 0
   enemiesPresent: 0
+  radius: 10
   presentEnemies: []
   gameStatus: {fileID: 11400000, guid: a5ff2fe6101e949d1939b31940fb8c2d, type: 2}
   waveText: {fileID: 0}

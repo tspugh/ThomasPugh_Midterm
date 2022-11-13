@@ -5,8 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float mouseSensitivity = 10f;
-    public float bulletSpeed;
     
+
+    public float bulletSpeed = 50;
+    public float interval = 0.2f;
+    public int amountOfBullets = 4;
+
 
     public GameStatus gameStatus;
 
@@ -37,6 +41,9 @@ public class PlayerController : MonoBehaviour
     {
         BulletSpawner b = GetComponent<BulletSpawner>();
         b.bulletPatterns[0].bulletHolder[0].bulletS = bulletSpeed;
+        b.bulletPatterns[0].bulletHolder[0].interval = interval;
+        b.interval = interval;
+        b.bulletPatterns[0].bulletHolder[0].amountOfBullets = amountOfBullets;
     }
 
     

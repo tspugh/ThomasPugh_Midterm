@@ -9,6 +9,9 @@ TagManager:
   - EnemyBullet
   - Background
   - Pickup
+  - ZoneManager
+  - Shield
+  - NoHitBullet
   layers:
   - Default
   - TransparentFX

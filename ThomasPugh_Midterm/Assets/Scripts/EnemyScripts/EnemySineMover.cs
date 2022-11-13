@@ -11,7 +11,7 @@ public class EnemySineMover : EnemyBasic
     private float time;
     private float period;
 
-    void Start()
+    protected new void Start()
     {
         base.Start();
         time = 0;

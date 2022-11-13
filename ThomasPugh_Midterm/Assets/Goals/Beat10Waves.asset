@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3664a0316c54ec48ed8cf2e234c9ef, type: 3}
+  m_Name: Beat10Waves
+  m_EditorClassIdentifier: 
+  goalType: 02000000
+  enemyType: {fileID: 0}
+  enemyAmount: 0
+  waveAmount: 10
+  zoneAmount: 0
+  timedInterval: 0
+  currencyValue: 30

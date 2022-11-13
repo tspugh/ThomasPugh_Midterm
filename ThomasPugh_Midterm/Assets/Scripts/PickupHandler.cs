@@ -5,12 +5,14 @@ using UnityEngine;
 public class PickupHandler : MonoBehaviour
 {
 
+    public bool gotPickup = false;
+
     public PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gotPickup = false;
     }
 
     // Update is called once per frame
@@ -21,6 +23,7 @@ public class PickupHandler : MonoBehaviour
 
     public void GetPickup(PickupType pickup)
     {
+        gotPickup = true;
         if(pickup == PickupType.healthUpgrade)
         {
             Damageable d = GetComponent<Damageable>();

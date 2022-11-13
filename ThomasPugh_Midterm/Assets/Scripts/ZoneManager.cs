@@ -10,6 +10,7 @@ public class ZoneManager : MonoBehaviour
     public Zone[] zones;
     public int currentZone = 0;
     public int currentWave = 0;
+    public int wavesCompleted;
     public int enemiesPresent = 0;
     public float radius = 10;
     private GameObject currentBG;
@@ -49,6 +50,7 @@ public class ZoneManager : MonoBehaviour
     public void incrementWave()
     {
         currentWave++;
+        wavesCompleted++;
         
         if (currentZone < zones.Length && currentWave >= zones[currentZone].length+2)
         {
@@ -124,7 +126,9 @@ public class ZoneManager : MonoBehaviour
         pickupsSpawned = false;
 
         if (currentZone >= Mathf.Min(zones.Length, maxZone))
-            GameManagerScript.myScript.TriggerPlayerDeath();
+        {
+            GameEvents.InvokeGameOver(true);
+        }
         else
         {
             currentBG = Instantiate(zones[currentZone].background, new Vector3(0, 0, 0), Quaternion.identity);
