@@ -39,5 +39,15 @@ public class PickupHandler : MonoBehaviour
             playerController.bulletSpeed *= 1.5f;
             playerController.UpdateBulletPattern();
         }
+        else if(pickup == PickupType.extraBullet)
+        {
+            playerController.amountOfBullets += 1;
+            playerController.UpdateBulletPattern();
+        }
+        else if(pickup == PickupType.shotInterval)
+        {
+            playerController.interval *= 4f / 5f;
+            playerController.UpdateBulletPattern();
+        }
     }
 }

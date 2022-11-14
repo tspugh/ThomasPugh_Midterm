@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using System.Linq;
 
 public class BulletSpawner : MonoBehaviour
 {
@@ -12,12 +13,36 @@ public class BulletSpawner : MonoBehaviour
 
 	public bool isSpawningBullets;
 
+    public int difficulty = 0;
+
+    protected float[] bulletAmountDifficultyMod = { 1, 1.2f };
+    protected float[] bulletSpeedDifficultyMod = { 1, 1.3f };
+    protected float[] durationDifficultyMod = { 1, 1.3f };
+
+    public BulletPatternList[] addedDifficultyPatterns1;
+    public BulletPatternList[] addedDifficultyPatterns2;
+
 	void Start()
 	{
         if(spawnOnStart)
 		    StartPattern();
 		gameObject.AddComponent<AudioSource>();
+        
 	}
+
+    public void SetDifficulty(int difficulty)
+    {
+        this.difficulty = difficulty;
+        if (difficulty > 0)
+        {
+            bulletPatterns = bulletPatterns.Concat(addedDifficultyPatterns1).ToArray();
+
+        }
+        if (difficulty > 1)
+        {
+            bulletPatterns = bulletPatterns.Concat(addedDifficultyPatterns2).ToArray();
+        }
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -105,9 +130,9 @@ public class BulletSpawner : MonoBehaviour
 	public int SelectRandomPattern()
     {
 		float sum = 0;
-		for (int i = 0; i < weights.Length; i++) sum += weights[i];
+		for (int i = 0; i < Mathf.Min(weights.Length,bulletPatterns.Length); i++) sum += weights[i];
 		int index = 0;
-		while(index < weights.Length-1)
+		while(index < Mathf.Min(weights.Length, bulletPatterns.Length) - 1)
         {
 			if (Random.Range(0, sum) < weights[index])
 				return index;
@@ -146,14 +171,14 @@ public class BulletSpawner : MonoBehaviour
 
         float rotationS = pat.rotationSpeed;
         float rotationA = pat.rotationAccel;
-        float t = pat.duration;
+        float t = pat.duration * durationDifficultyMod[difficulty];
         float interv = pat.interval;
 
-        float bS = pat.bulletS;
+        float bS = pat.bulletS * bulletSpeedDifficultyMod[difficulty];
         float bA = pat.bulletA;
         float bJ = pat.bulletJ;
 
-        int aOB = pat.amountOfBullets;
+        int aOB = (int)(pat.amountOfBullets * bulletAmountDifficultyMod[difficulty]);
         int dAOB = pat.deltaAmountOfBullets;
 
         AudioSource audioSource = GetComponent<AudioSource>();

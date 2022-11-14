@@ -25,7 +25,6 @@ public class GameStatus : ScriptableObject
         if(aspect<desired)
         {
             float screensz = 1f / desired * (maxX - minX);
-            Debug.Log(screensz);
             float whole = 1f / aspect * (maxX - minX);
             maxY -= (whole - screensz) / 2f + 1f/17f * screensz;
             minY += (whole - screensz) / 2f + 1f/14f*screensz;
@@ -33,6 +32,17 @@ public class GameStatus : ScriptableObject
             screensz = desired * (maxY - minY);
             maxX -= screensz * 9f / 40f;
             minX += screensz * 3f / 80f;
+        }
+        else
+        {
+            float screensz = desired * (maxY - minY);
+            float whole = aspect * (maxY - minY);
+            maxY -= 1f / 22f * screensz;
+            minY += 1f / 17f * screensz;
+
+            screensz = desired * (maxY - minY);
+            maxX -= (whole - screensz)/2f + screensz * 5f / 40f;
+            minX += screensz * 3f / 70f;
         }
     }
 }

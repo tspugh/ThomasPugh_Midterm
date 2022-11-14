@@ -16,6 +16,8 @@ MonoBehaviour:
   bulletS: 0
   bulletA: 20
   bulletJ: 0
+  bulletAAngle: 0
+  bulletJAngle: 0
   deltaS: 0
   deltaA: 0
   deltaJ: 0
@@ -32,8 +34,10 @@ MonoBehaviour:
   rotationJerk: 0
   shootAtPlayer: 1
   continueToShootAtPlayer: 0
+  motionDir: 0
   isRunning: 1
-  randomAngle: 1
+  randomAngle: 0
+  overrideAngle: 0
   deltaPitch: 0.07
   angle: 0
   mySound: {fileID: 8300000, guid: c817d010b1c2149f0b1f3ab66e7192ae, type: 3}

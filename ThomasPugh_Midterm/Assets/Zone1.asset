@@ -31,6 +31,6 @@ MonoBehaviour:
   background: {fileID: 8353908648861383062, guid: 5e560aebd8d0c4d5f935d80ff97d66e6, type: 3}
   upgrades:
   - {fileID: 2836266186654448476, guid: a977c5c30b05343dc93b5193603c4ec0, type: 3}
-  - {fileID: 3002629769902963551, guid: 081578fce7342415089e07f15343f38d, type: 3}
+  - {fileID: 3002629769902963551, guid: 16581eacffd13437a9687c3ab012ed13, type: 3}
   - {fileID: 3104468042336378790, guid: 02a0c9cee6efa4bd797198ad311365ad, type: 3}
   material: {fileID: 2100000, guid: a1fb9b2ad6d1a4036bed784d702a3fb1, type: 2}

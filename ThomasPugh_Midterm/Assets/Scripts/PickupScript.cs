@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public enum PickupType {healthUpgrade, turretUpgrade, fireSpeedUpgrade }
+public enum PickupType {healthUpgrade, turretUpgrade, fireSpeedUpgrade, extraBullet, shotInterval }
 
 public class PickupScript : MonoBehaviour
 {
@@ -16,10 +16,8 @@ public class PickupScript : MonoBehaviour
     private UnityEngine.Color color;
 
 
-    void OnMouseOver()
+    void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
             foreach (GameObject o in SceneManager.GetActiveScene().GetRootGameObjects())
             {
                 if (o.CompareTag("Player"))
@@ -28,7 +26,7 @@ public class PickupScript : MonoBehaviour
                 }
             }
             Destroy(gameObject);
-        }
+        
     }
 
     private void Start()

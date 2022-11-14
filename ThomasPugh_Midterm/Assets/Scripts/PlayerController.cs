@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        gameStatus.UpdateBounds(0, 0);
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouse = new Vector3(Mathf.Clamp(mouse.x, gameStatus.minX, gameStatus.maxX), Mathf.Clamp(mouse.y, gameStatus.minY, gameStatus.maxY), 0);
         Vector3 diff = mouse - transform.position;
@@ -40,10 +41,10 @@ public class PlayerController : MonoBehaviour
     public void UpdateBulletPattern()
     {
         BulletSpawner b = GetComponent<BulletSpawner>();
-        b.bulletPatterns[0].bulletHolder[0].bulletS = bulletSpeed;
-        b.bulletPatterns[0].bulletHolder[0].interval = interval;
-        b.interval = interval;
-        b.bulletPatterns[0].bulletHolder[0].amountOfBullets = amountOfBullets;
+        b.bulletPatterns[0].bulletHolder[0].bulletS = this.bulletSpeed;
+        b.bulletPatterns[0].bulletHolder[0].interval = this.interval;
+        b.interval = this.interval;
+        b.bulletPatterns[0].bulletHolder[0].amountOfBullets = this.amountOfBullets;
     }
 
     

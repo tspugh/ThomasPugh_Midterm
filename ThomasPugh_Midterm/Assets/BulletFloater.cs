@@ -37,7 +37,6 @@ public class BulletFloater : BulletBasic
         Light2D light = GetComponent<Light2D>();
         Color initialcolor = r.color;
         float lightinitial = light.intensity;
-        Debug.Log(lightinitial);
         while (time<bulletSurvivalTime)
         {
             r.color = new Color(initialcolor.r, initialcolor.g, initialcolor.b, Mathf.Pow(Mathf.Lerp(1, 0, time / bulletSurvivalTime), 5f/6f));

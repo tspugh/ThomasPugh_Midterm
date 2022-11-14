@@ -143,7 +143,7 @@ public class BackgroundMusic : MonoBehaviour
             keepTrackTime = 0;
             if (currentSound == SoundtrackType.Intro)
                 currentSound = SoundtrackType.Menu;
-            RestartTrack(currentSound);
+            SwapTrack(currentSound);
         }
     }
 

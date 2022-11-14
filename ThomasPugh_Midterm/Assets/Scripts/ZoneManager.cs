@@ -17,6 +17,10 @@ public class ZoneManager : MonoBehaviour
     public List<GameObject> presentEnemies = new List<GameObject>();
     public GameStatus gameStatus;
     public GameObject waveText;
+
+    public int difficulty = 0;
+
+    protected float[] chanceToDoubleSpawn = { 0f, 0.125f };
     
     public int maxZone = 1;
 
@@ -63,13 +67,16 @@ public class ZoneManager : MonoBehaviour
 
     public void spawnWave()
     {
-        Debug.Log(this.name + currentWave);
+        
         Wave cur = zones[currentZone].GetNextWave(currentWave);
-        foreach(GameObject o in cur.enemies)
+        Debug.Log(this.name +":Wave Name: " + cur.name);
+        for(int i = 0; i<cur.enemies.Length; i++)
         {
+            GameObject o = cur.enemies[i];
             bool gettingNextWave = true;
             Vector3 newPos = Vector3.zero;
             float rad = radius;
+
             while(gettingNextWave)
             {
                 newPos = new Vector3(Random.Range(gameStatus.minX, gameStatus.maxX), Random.Range(gameStatus.minY, gameStatus.maxY), 0);
@@ -91,15 +98,25 @@ public class ZoneManager : MonoBehaviour
                     Debug.Log("Error Spawning Enemies");
                 }
             }
+
             GameObject holder = Instantiate(o, newPos, Quaternion.identity);
             SpriteRenderer s = holder.GetComponent<SpriteRenderer>();
             if(s)
             {
                 s.material = zones[currentZone].material;
             }
+            EnemyBehaviour enemyBehaviour = holder.GetComponent<EnemyBehaviour>();
+            if(enemyBehaviour)
+            {
+                enemyBehaviour.difficulty = this.difficulty;
+            }
             
             presentEnemies.Add(holder);
             enemiesPresent++;
+
+
+            if (Random.Range(0f, 1f) < chanceToDoubleSpawn[difficulty] && currentWave! > zones[currentZone].length)
+                i--;
         }
     }
 

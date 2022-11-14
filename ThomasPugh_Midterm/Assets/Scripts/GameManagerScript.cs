@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
 
     public GameObject[] playerObjects;
     public int playerIndex = 0;
+
+    public int difficulty = 0;
+    public Texture2D[] difficultyIcons;
+
     public GameObject zoneManager;
     public GameObject zoneManagersRequiredTextField;
     public GameObject healthBarButThisIsKindaASketchyCall;
@@ -43,7 +48,7 @@ public class GameManagerScript : MonoBehaviour
 
     void AllowInstantDeath()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             GameObject[] holder = SceneManager.GetActiveScene().GetRootGameObjects();
             foreach (GameObject o in holder)
@@ -82,6 +87,7 @@ public class GameManagerScript : MonoBehaviour
         zoneManagerHolder = Instantiate(zoneManager);
         zoneManagerHolder.GetComponent<ZoneManager>().waveText = zoneManagersRequiredTextField;
         zoneManagerHolder.GetComponent<ZoneManager>().maxZone = this.maxZone;
+        zoneManagerHolder.GetComponent<ZoneManager>().difficulty = this.difficulty;
         yield return null;
     }
 
@@ -121,6 +127,11 @@ public class GameManagerScript : MonoBehaviour
     public void IncreasePlayerIndex()
     {
         playerIndex = (playerIndex + 1) % playerObjects.Length;
+    }
+
+    public void IncreaseDifficulty()
+    {
+        difficulty = (difficulty + 1) % difficultyIcons.Length;
     }
 
 }

@@ -20,6 +20,19 @@ public class Damageable : MonoBehaviour
 
     private bool isInvincibile;
 
+    protected float[] healthDifficultyMod = { 1, 1.5f };
+    protected float[] pointDifficultyIncrease = { 1, 2 };
+
+    public int difficulty = 0;
+
+    public void SetDifficulty(int difficulty)
+    {
+        this.difficulty = difficulty;
+        health = (int)(health * healthDifficultyMod[difficulty]);
+        maxHealth = (int)(maxHealth * healthDifficultyMod[difficulty]);
+        pointValue = (int)(pointValue * pointDifficultyIncrease[difficulty]);
+    }
+
     private void Awake()
     {
         GameEvents.GameOver += OnGameOver;

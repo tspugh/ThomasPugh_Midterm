@@ -17,6 +17,6 @@ public class PanelPosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        rectTransform.anchoredPosition3D = new Vector3(Screen.width * (x), Screen.height * (-y), 0);
     }
 }

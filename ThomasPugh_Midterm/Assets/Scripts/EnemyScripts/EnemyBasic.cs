@@ -20,10 +20,43 @@ public class EnemyBasic : EnemyBehaviour
     public int snakeDelay;
 
     protected GameObject snakeHead;
+    private bool givenMaterial = false;
+    private GameObject snakeO;
     protected List<Vector3> headTracks;
+
+    private bool damageableDifficulty;
+    private bool bulletDifficulty;
+
+    
+    protected float[] snakeDifficultyMod = { 1, 1.5f };
+
+
+    public void SetUpDifficulty()
+    {
+        snakeAmount = (int)((float)snakeAmount * snakeDifficultyMod[difficulty]);
+        velocity *= velocityDifficultyMod[difficulty];
+        maxVelocity *= velocityDifficultyMod[difficulty];
+        acceleration *= accelerationDifficultyMod[difficulty];
+        maxAcceleration *= accelerationDifficultyMod[difficulty];
+
+        
+    }
+
+    public virtual void Awake()
+    {
+        SetUpDifficulty();
+        if (isSnake && snakeAmount > 1)
+        {
+            snakeAmount--;
+            snakeO = Instantiate(this.gameObject, transform.position, Quaternion.identity) as GameObject;
+            GameEvents.InvokeEnemySpawned(snakeO.gameObject);
+            
+        }
+    }
 
     public virtual void Start()
     {
+        
         GameEvents.InvokeEnemySpawned(gameObject);
         SetRandomVelocity();
         vel = Random.Range(velocity, maxVelocity);
@@ -32,13 +65,7 @@ public class EnemyBasic : EnemyBehaviour
 
         headTracks = new List<Vector3>();
 
-        if(isSnake && snakeAmount>1)
-        {
-            GameObject snakeO = Instantiate(this.gameObject, transform.position, Quaternion.identity);
-            GameEvents.InvokeEnemySpawned(snakeO.gameObject);
-            snakeO.GetComponent<EnemyBasic>().snakeAmount = this.snakeAmount - 1;
-            snakeO.GetComponent<EnemyBasic>().snakeHead = this.gameObject;
-        }
+        
     }
 
     public override void Rotate()
@@ -48,6 +75,28 @@ public class EnemyBasic : EnemyBehaviour
 
     public override void Translate()
     {
+
+        if (!givenMaterial && snakeO != null && !snakeO.GetComponent<SpriteRenderer>().material.Equals(GetComponent<SpriteRenderer>().material))
+        {
+            snakeO.GetComponent<EnemyBasic>().snakeHead = this.gameObject;
+            snakeO.GetComponent<SpriteRenderer>().material = GetComponent<SpriteRenderer>().material;
+            givenMaterial = snakeO.GetComponent<SpriteRenderer>().material.Equals(GetComponent<SpriteRenderer>().material);
+        }
+
+        Damageable damageable = GetComponent<Damageable>();
+        if (!damageableDifficulty && damageable)
+        {
+            damageable.SetDifficulty(this.difficulty);
+            damageableDifficulty = true;
+        }
+
+        BulletSpawner bs = GetComponent<BulletSpawner>();
+        if(!bulletDifficulty && bs!=null)
+        {
+            bs.SetDifficulty(this.difficulty);
+            bulletDifficulty = true;
+        }
+
         if (snakeHead == null)
         {
             transform.position += vel * velocityDir * Time.deltaTime;
@@ -69,6 +118,7 @@ public class EnemyBasic : EnemyBehaviour
 
     public void SetRandomVelocity()
     {
+        vel = Random.Range(velocity, maxVelocity);
         velocityDir = new Vector3(Random.Range(-1f,1f),Random.Range(-1f,1f),0);
         if (velocityDir.magnitude == 0)
             SetRandomVelocity();
@@ -142,4 +192,6 @@ public class EnemyBasic : EnemyBehaviour
                 GetComponent<BulletSpawner>().RunPatternOnce();
         }
     }
+
+    
 }

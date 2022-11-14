@@ -26,6 +26,7 @@ public class MenuManager : MonoBehaviour
 
     void ChangeMenuType(MenuType menu)
     {
+        Screen.SetResolution(Screen.width, Screen.height, Screen.fullScreen);
         if (menu == MenuType.Intermediate)
             destination = new Vector3(-Screen.width, 0f, 0f);
         else if (menu == MenuType.MainGame)
@@ -38,7 +39,7 @@ public class MenuManager : MonoBehaviour
 
     public void OnQuitButtonPressed()
     {
-        
+        Application.Quit();
     }
 
     public void OnStartButtonPressed()
@@ -51,6 +52,12 @@ public class MenuManager : MonoBehaviour
     {
         ChangeMenuType(MenuType.Intermediate);
     }
+
+    public void OnBackButtonPressed()
+    {
+        ChangeMenuType(MenuType.StartMenu);
+    }
+
 
     public void ToIntermediate(object sender, DestructionArgs e)
     {

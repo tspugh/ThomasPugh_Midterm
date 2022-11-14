@@ -59,6 +59,11 @@ public class EnemyTurretHandler : MonoBehaviour
     void InstantiateNewTurret()
     {
         GameObject o = Instantiate(potentialTurrets[Random.Range(0, potentialTurrets.Length)], transform.position, Quaternion.identity) as GameObject;
+        EnemyOnSpawn enemyOnSpawn = o.GetComponent<EnemyOnSpawn>();
+        if(enemyOnSpawn)
+        {
+            enemyOnSpawn.SetPredelay(GetComponent<EnemyOnSpawn>().GetPredelay());
+        }
         turretsPresent.Add(o);
         GameEvents.InvokeEnemySpawned(o);
     }
